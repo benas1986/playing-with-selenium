@@ -7,14 +7,14 @@ Use the newest stable Google Chrome
 
 QUICK START GUIDE
 
-1) Install virtual env:
+1) Install virtual env
    pip install virtualenv
-2) Create virtualenv named venv:
+2) Create virtualenv named venv
    virtualenv --python path-to-exe venv
-3) Activate virtual venv   
+3) Activate virtual venv 
    .\venv\Scripts\activate
 4) Install all requirements   
    pip install -r requirements.txt
 
-RUN tests with command:
+RUN tests with command
     pytest
