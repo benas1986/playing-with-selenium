@@ -1,0 +1,93 @@
+It is better to look for task 1 steps in steps.pdf file
+
+TASK 1
+Description: 
+Test logic is to change �isAdmin� status by scheme: ADMIN -> LIMITED -> ADMIN or LIMITED -> ADMIN -> LIMITED.
+
+Test steps table:
+Steps:
+Data:
+Expected results
+1) Login with the admin user credentials (With API call POST, which is not in task 1 example) and get access token for authentication. Use it in the other calls.
+admin user credentials
+Access token
+2) Check if user status is LIMITED or ADMIN with API call
+GET:
+http://telecommunication-site.com/{accountNr}/{msisdn}/admin
+API call response results:
+{
+  "isAdmin:true
+}
+or 
+{
+"isAdmin": false
+    }
+
+3) Change user status
+3)a) If  "isAdmin" status is false 
+POST: http://telecommunication-site.com/{accountNr}/{msisdn}/admin:
+API call body:
+    {
+        "isAdmin": true
+    }
+
+API call response results:
+    {
+        "isAdmin": true
+    }
+
+3)b)  If "isAdmin� status is true
+POST: http://telecommunication-site.com/{accountNr}/{msisdn}/admin:
+API call body:
+{
+        "isAdmin": false
+    }
+API call response results:
+    {
+        "isAdmin": false
+    }
+
+4) Check if user status changed
+GET: http://telecommunication-site.com/{accountNr}/{msisdn}/admin.
+
+Results must be different from test step 2)
+4)a)
+if in test step 2) "isAdmin" was true
+"isAdmin" must be false
+4)b)
+if in test step 2) "isAdmin" was false
+"isAdmin" must be true
+5) Try to change user status back with the same logic as we used in test step 3).
+API call POST: http://telecommunication-site.com/{accountNr}/{msisdn}/admin
+
+5)a) If  "isAdmin" status is false 
+API call body:
+    {
+        "isAdmin": true
+    }
+
+API call response results:
+    {
+        "isAdmin": true
+    }
+
+5)b) If "isAdmin� status is true
+API call body:
+{
+        "isAdmin": false
+}
+API call response results:
+    {
+        "isAdmin": false
+    }
+6) Check if API call toggles user status back
+call GET: http://telecommunication-site.com/{accountNr}/{msisdn}/admin:
+
+Results must be the same as in test step 2).
+6)a)
+if in test step 2) it was true
+"isAdmin" must be true
+6)b) 
+if in test step 2) it was false
+"isAdmin" must be false
+
