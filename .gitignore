@@ -5,6 +5,7 @@ _pycache_
 # Distribution / packaging
 *.egg-info/
 .idea
+.gitignore
 
 # Environments
 venv/
