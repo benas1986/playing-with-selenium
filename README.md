@@ -11,9 +11,9 @@ QUICK START GUIDE
    pip install virtualenv
 2) Create virtualenv named venv:
    virtualenv --python path-to-exe venv
-3) Activate virtual venv   
+3) Activate virtual venv:   
    .\venv\Scripts\activate
-4) Install all requirements   
+4) Install all requirements:   
    pip install -r requirements.txt
 
 RUN tests with command:
