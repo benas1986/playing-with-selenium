@@ -12,7 +12,7 @@ class ChromeDriver:
     def __init__(self):
         self.driver = None
 
-    def chrome_driver_start(self):
+    def start(self):
         LOG.debug("CONNECTING TO CHROME DRIVER")
         chrome_options = webdriver.ChromeOptions()
         chrome_options.add_argument("--no-sandbox")
@@ -21,6 +21,6 @@ class ChromeDriver:
         self.driver.maximize_window()
         return self.driver
 
-    def chrome_driver_stop(self):
+    def stop(self):
         LOG.debug("CLOSING CHROME DRIVER")
         return self.driver.quit()

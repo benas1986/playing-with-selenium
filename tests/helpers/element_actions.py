@@ -1,13 +1,14 @@
 import logging
 import time
 
+from selenium.webdriver import Chrome
 from selenium.webdriver import ActionChains
 
 LOG = logging.getLogger(__name__)
 
 
 class ElementActions:
-    def __init__(self, driver):
+    def __init__(self, driver: Chrome):
         self.driver = driver
         self.actions = ActionChains(self.driver)
         self.width = None
