@@ -1,11 +1,10 @@
 import logging
 import time
 
-from selenium.webdriver.common.by import By
+from selenium.webdriver import Chrome
 
 from tests.helpers.element_actions import ElementActions
 from tests.helpers.element_finder import FindElement
-from selenium.webdriver import Chrome
 
 LOG = logging.getLogger(__name__)
 
@@ -32,7 +31,7 @@ def test_web_iframe(
     LOG.info("COUNTING IMAGES")
     images = element_finder.list_by_tag_name("img")
     total_images = len(images)
-    LOG.info("Count images %s", total_images)
+    LOG.info("Total images %s", total_images)
 
     LOG.info("STEP 4")
     LOG.info("INSERTING TOTAL IMAGES COUNT INTO SEARCH")

@@ -1,13 +1,12 @@
 import logging
-
-from selenium import webdriver
+from selenium.webdriver import Chrome
 from selenium.webdriver.common.by import By
 
 LOG = logging.getLogger(__name__)
 
 
 class FindElement:
-    def __init__(self, driver: webdriver):
+    def __init__(self, driver: Chrome):
         self.driver = driver
         self.row_location = None
         self.row_elements_text = None
@@ -43,7 +42,7 @@ class FindElement:
         LOG.info("elements_by_css_selector %s", elements)
         return elements
 
-    def by_css_selector_and_tr_and_td(self, row_location: int, column_location: int):
+    def by_tr_and_td(self, row_location: int, column_location: int):
         """
         Gets element by row and column locations
         @param row_location: row location number int
@@ -56,7 +55,7 @@ class FindElement:
         LOG.info("element by css selector and tr,td locations  %s", element)
         return element
 
-    def table_header_column_location_by_text(self, text: str) -> int:
+    def th_column_location_by_text(self, text: str) -> int:
         """
         Gets table header column location number when we know row number
         @param text: text of table field str
@@ -72,7 +71,7 @@ class FindElement:
         LOG.info("table header column location: %s", column_location)
         return column_location
 
-    def table_body_row_location_by_text(self, text: str) -> int:
+    def tbody_row_location_by_text(self, text: str) -> int:
         """
         Gets table body row location number by text of table field
         @param text: text of table field str
@@ -90,30 +89,30 @@ class FindElement:
         LOG.info("table body row location: %s", self.row_location)
         return self.row_location
 
-    def by_table_body_field_text(self, text: str):
+    def by_tbody_field_text(self, text: str):
         """
         Finds element table body row and column location number by text of table field
         @param text: text of table field str
         @return: column location number int
         """
-        self.table_body_row_location_by_text(text)
+        self.tbody_row_location_by_text(text)
         row_el_list = self.row_elements_text[self.row_location_index].split()
         LOG.info("row elemenent list: %s", row_el_list)
         column_index = [i for i, e in enumerate(row_el_list) if text in e][0]
         LOG.info("column index: %s", column_index)
         column_location = column_index + 1
         LOG.info("table body column location: %s", column_location)
-        element = self.by_css_selector_and_tr_and_td(self.row_location, column_location)
+        element = self.by_tr_and_td(self.row_location, column_location)
         return element
 
-    def by_text_in_table_body_row_and_xpath(self, text: str, el_xpath: str):
+    def by_text_in_tbody_row_and_xpath(self, text: str, el_xpath: str):
         """
         Finds element by text in table body row and xpath
         @param text: text of table field in raw str
         @param el_xpath: xpath str
         @return: element
         """
-        self.row_location = self.table_body_row_location_by_text(text)
+        self.row_location = self.tbody_row_location_by_text(text)
         element = self.by_xpath(f"//table/tbody/tr[{self.row_location}]/td{el_xpath}")
         LOG.info("element text %s", element.text)
         return element
@@ -132,4 +131,4 @@ class FindElement:
         Finds iframe which we need to use. It is third iframe element
         @return: element
         """
-        return self.driver.find_elements(By.XPATH, "//iframe")[3]
+        return self.list_by_xpath("//iframe")[3]
