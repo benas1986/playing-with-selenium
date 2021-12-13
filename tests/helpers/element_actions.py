@@ -26,21 +26,23 @@ class ElementActions:
         LOG.info("element width %s and height %s", self.width, self.width)
         return self.width, self.height
 
-    def highlight_text(self, element):
+    def highlight_text(self, element, duration):
         """
         Highlights text element
         @param element: element object
+        @param duration: duration int
         """
         self.actions.double_click(element)
         self.actions.perform()
-        time.sleep(2)
+        time.sleep(duration)
         self.actions.click()
         self.actions.perform()
 
-    def highlight_link(self, element):
+    def highlight_link(self, element, duration):
         """
         Highlights link element
         @param element: element object
+        @param duration: duration int
         """
         self.width, self.height = self.width_and_height(element)
         self.actions.move_to_element(element)
@@ -48,7 +50,7 @@ class ElementActions:
         self.actions.click_and_hold()
         self.actions.move_by_offset(self.width, 10)
         self.actions.perform()
-        time.sleep(2)
+        time.sleep(duration)
         self.actions.click()
         self.actions.perform()
 
